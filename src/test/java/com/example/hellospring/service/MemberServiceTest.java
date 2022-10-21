@@ -8,13 +8,20 @@ import com.example.hellospring.repository.MemberRepository;
 import com.example.hellospring.repository.MemoryMemberRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class MemberServiceTest {
 
-    MemberService memberService = new MemberService();
-    MemberRepository repository = new MemoryMemberRepository();
+    MemberService memberService;
+    MemberRepository repository;
+
+    @BeforeEach
+    void beforeEach() {
+        repository = new MemoryMemberRepository();
+        memberService = new MemberService(repository);
+    }
 
     @AfterEach
     void afterEach() {

@@ -1,11 +1,13 @@
 package com.example.hellospring;
 
 import com.example.hellospring.repository.JdbcMemberRepository;
+import com.example.hellospring.repository.JdbcTemplateMemberRepository;
 import com.example.hellospring.repository.MemberRepository;
 import com.example.hellospring.service.MemberService;
 import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 @Configuration
 public class SpringConfig {
@@ -19,7 +21,8 @@ public class SpringConfig {
     @Bean
     public MemberRepository memberRepository() {
         //return new MemoryMemberRepository();
-        return new JdbcMemberRepository(dataSource);
+        //return new JdbcMemberRepository(dataSource);
+        return new JdbcTemplateMemberRepository(dataSource);
     }
 
     @Bean

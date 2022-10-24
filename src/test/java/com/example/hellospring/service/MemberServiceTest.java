@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 class MemberServiceTest {
 
     MemberService memberService;
-    MemberRepository repository;
+    MemoryMemberRepository repository;
 
     @BeforeEach
     void beforeEach() {

@@ -128,11 +128,6 @@ public class JdbcMemberRepository implements MemberRepository {
         }
     }
 
-    @Override
-    public void deleteAll() {
-
-    }
-
     private void close(Connection conn, PreparedStatement pstmt, ResultSet rs) {
         try {
             if (rs != null) {

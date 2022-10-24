@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 class MemoryMemberRepositoryTest {
 
-    MemberRepository repository = new MemoryMemberRepository();
+    MemoryMemberRepository repository = new MemoryMemberRepository();
 
     @AfterEach
     void clearData() {

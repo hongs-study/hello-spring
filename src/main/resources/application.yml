@@ -1,6 +1,18 @@
+server:
+  port: 8000
 spring:
+#  datasource:
+#    driver-class-name: org.h2.Driver
+#    url: jdbc:h2:tcp://localhost/~/Developer/datasource/h2/spring-hello
+#    username: sa
+#    password:
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:tcp://localhost/~/Developer/datasource/h2/spring-hello
-    username: sa
+    jdbc-url: jdbc:mysql://localhost:3306/content_review?useSSL=false&serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8&allowMasterDownConnections=true
+    username: root
     password:
+    hikari:
+      minimum-idle: 1
+      maximum-pool-size: 45
+
+  jpa:
+    open-in-view: false

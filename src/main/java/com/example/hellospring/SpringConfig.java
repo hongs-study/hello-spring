@@ -1,6 +1,7 @@
 package com.example.hellospring;
 
 import com.example.hellospring.repository.SpringDataJpaMemberRepository;
+import com.example.hellospring.service.CustomService;
 import com.example.hellospring.service.MemberService;
 import javax.persistence.EntityManager;
 import javax.sql.DataSource;
@@ -37,4 +38,8 @@ public class SpringConfig {
         return new MemberService(repository);
     }
 
+    @Bean
+    public CustomService customService() {
+        return new CustomService();
+    }
 }

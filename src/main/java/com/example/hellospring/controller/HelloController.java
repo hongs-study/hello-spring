@@ -1,5 +1,7 @@
 package com.example.hellospring.controller;
 
+import com.example.hellospring.service.CustomService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +10,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class HelloController {
+
+    private final CustomService customService;
+
+    @Autowired
+    public HelloController(CustomService customService) {
+        this.customService = customService;
+    }
+
+    @GetMapping("/hello/custom")
+    public String customTest(Model model) {
+        customService.testString();
+        return "hello";
+    }
 
     @GetMapping("/hello")
     public String hello(Model model) {

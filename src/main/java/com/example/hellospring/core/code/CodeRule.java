@@ -17,7 +17,9 @@ public interface CodeRule {
     BiPredicate<Enum<?>, String> defaultEqualPredicateString = (thisType, string) -> thisType.name().equals(string);
 
     String getTitle();
+
     boolean eq(String string);
+
     default boolean eq(Enum<?> type) {
         return this.equals(type);
     }

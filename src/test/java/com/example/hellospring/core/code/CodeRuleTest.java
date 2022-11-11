@@ -24,6 +24,7 @@ class CodeRuleTest {
     @DisplayName("1. equals() 사용시 주의점")
     @Test
     void test1() {
+
         ReviewStatus reviewStatus = review.get("status");
         //System.out.println(reviewStatus.equals(ReviewStatus.ACTIVE));
         System.out.println(ReviewStatus.ACTIVE.equals(null));

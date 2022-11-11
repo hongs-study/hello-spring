@@ -91,7 +91,7 @@ class CodeRuleTest {
     @DisplayName("리스트 조회 테스트")
     @Test
     void getListTest() {
-        List<CodeVo> codes = CodeRule.codeList(ReviewStatus.class);
+        List<CodeVo> codes = CodeRule.codeAndCodeNameList(ReviewStatus.class);
         codes.forEach(System.out::println);
 
         CodeVo typeNameVo = codes.get(0);

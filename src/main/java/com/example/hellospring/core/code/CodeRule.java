@@ -58,7 +58,7 @@ public interface CodeRule {
      * code, codeName 형태의 리스트를 반환한다.
      * @param enumType 대상 Enum 클래스
      */
-    static List<CodeVo> codeList(Class<? extends CodeRule> enumType) {
+    static List<CodeVo> codeAndCodeNameList(Class<? extends CodeRule> enumType) {
         List<CodeVo> collect = Arrays.stream(enumType.getEnumConstants())
             .map(e -> (CodeRule) e)
             .map(CodeVo::new)

@@ -24,17 +24,8 @@ public class SpringConfig {
         this.repository = repository;
     }
 
-    /*@Bean
-    public MemberRepository memberRepository() {
-        //return new MemoryMemberRepository();
-        //return new JdbcMemberRepository(dataSource);
-        //return new JdbcTemplateMemberRepository(dataSource);
-        //return new JpaMemberRepository(em);
-    }*/
-
     @Bean
     public MemberService memberService() {
-        //return new MemberService(memberRepository());
         return new MemberService(repository);
     }
 

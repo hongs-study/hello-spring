@@ -13,5 +13,5 @@ public enum ReportStatus {
     RESOLVED("승인"),
     CANCELED("반려");
 
-    private final String title;
+    private final String codeName;
 }

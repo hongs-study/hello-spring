@@ -14,5 +14,5 @@ public enum Reporter {
     HOST("점주")
     ;
 
-    private final String title;
+    private final String codeName;
 }

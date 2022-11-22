@@ -11,5 +11,5 @@ import lombok.Getter;
 public enum ReportStatus {
     OPEN("접수"), RESOLVED("승인"), CANCELED("반려");
 
-    private final String title;
+    private final String codeName;
 }

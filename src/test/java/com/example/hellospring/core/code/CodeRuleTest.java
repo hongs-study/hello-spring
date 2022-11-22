@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import org.json.JSONObject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -89,16 +90,23 @@ class CodeRuleTest {
         Assertions.assertFalse(ReviewStatus.ACTIVE.equals(""));
     }
 
-    @DisplayName("리스트 조회 테스트")
+    @DisplayName("코드-코드명 변환 (전체)")
     @Test
     void getListTest() {
         List<CodeVo> codes = CodeRule.codeAndCodeNameList(ReviewStatus.class);
         codes.forEach(System.out::println);
-
-        CodeVo typeNameVo = codes.get(0);
-        System.out.println("code = " + typeNameVo.getCode().getClass());
-        System.out.println("codeName = " + typeNameVo.getCodeName().getClass());
     }
+
+    @DisplayName("코드-코드명 변환 (일부)")
+    @Test
+    void getListTest2() {
+        List<ReviewStatusReason> reviewStatusList = ReviewStatusReason.getListBy(ReviewStatus.BLINDED);
+        List<CodeVo> codes = CodeRule.codeAndCodeNameList(reviewStatusList);
+        codes.forEach(System.out::println);
+    }
+
+
+
 
 /*    @DisplayName("객체찾기3: 기본값 지정하기(직접구현)")
     @Test

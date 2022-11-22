@@ -10,5 +10,5 @@ public enum ReviewReportStatus {
     HAVE_OPEN_REPORT("신고접수 리뷰"),
     DONE_REPORT("승인완료 리뷰");
 
-    private final String title;
+    private final String codeName;
 }

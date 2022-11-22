@@ -13,7 +13,7 @@ import lombok.Getter;
  */
 @AllArgsConstructor
 @Getter
-public enum ReviewStatusReason {
+public enum ReviewStatusReason implements CodeRule {
 
     RESOLVED_BLIND_REASON_01(BLINDED, "사실과 다른 내용", false),
     RESOLVED_BLIND_REASON_02(BLINDED, "정확한 이용일 확인이 어렵거나 이용 후 7일 이상 경과한 경우", false),
@@ -32,8 +32,13 @@ public enum ReviewStatusReason {
     ;
 
     private final ReviewStatus reviewStatus; // 리뷰 상태
-    private final String title;
+    private final String codeName;
     private final boolean isPointMinus; // 포인트 차감 여부
+
+    @Override
+    public boolean eq(String string) {
+        return defaultEqualPredicateString.test(this, string);
+    }
 
     /**
      * 리뷰상태별 사유 목록

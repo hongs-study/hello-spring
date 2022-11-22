@@ -10,7 +10,7 @@ public enum ReviewStatus implements CodeRule {
     BLINDED("블라인드"),
     DELETED("삭제");
 
-    private final String title;
+    private final String codeName;
 
     @Override
     public boolean eq(String string) {

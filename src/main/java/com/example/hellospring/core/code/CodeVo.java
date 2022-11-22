@@ -11,6 +11,6 @@ public class CodeVo {
 
     CodeVo(CodeRule code) {
         this.code = code;
-        this.codeName = code.getTitle();
+        this.codeName = code.getCodeName();
     }
 }

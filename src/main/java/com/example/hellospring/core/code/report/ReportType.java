@@ -12,5 +12,5 @@ public enum ReportType {
     NORMAL_REPORT("일반 신고"),
     RIGHT_REPORT("권리 침해 신고")
     ;
-    private final String title;
+    private final String codeName;
 }

@@ -31,7 +31,7 @@ public enum ReportReason {
 
     private final Reporter reporter;        // 신고자 구분 (유저, 업주)
     private final ReportType reportType;    // 신고 유형 (일반, 권리침해)
-    private final String title;
+    private final String codeName;
 
     /**
      * 신고자별 목록

@@ -15,7 +15,8 @@ public class Hello {
     private LocalDate date = LocalDate.now();
     private LocalDateTime dateTime = LocalDateTime.now();
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss+0900", timezone = "Asia/Seoul")
-    private ZonedDateTime zonedDateTime = ZonedDateTime.now();
+    // 방법1 - 필드 개별 적용
+    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul")
+    private ZonedDateTime zoneTime = ZonedDateTime.now();
 
 }

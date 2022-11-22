@@ -25,6 +25,7 @@ public class JacksonConfig {
 
     private static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
+    // 방법2 - API 응답 전역으로 적용
     @Bean
     public Jackson2ObjectMapperBuilderCustomizer jacksonMapper() {
         return builder -> {
@@ -32,16 +33,27 @@ public class JacksonConfig {
             builder.serializers(new LocalDateSerializer(DateTimeFormatter.ofPattern(DATE_FORMAT)));
             //builder.serializers(new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT)));
             builder.serializerByType(LocalDateTime.class, new LocalDateTimeSerializerCustom());
+            builder.serializerByType(ZonedDateTime.class, new ZonedDateTimeSerializerCustom());
         };
     }
 
-    // ❗️LocalDateTime 타입 직렬화는 이걸로 해결된다.
     public static class LocalDateTimeSerializerCustom extends JsonSerializer<LocalDateTime> {
         @Override
         public void serialize(LocalDateTime value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
             String formattedDateTime = ZonedDateTime.of(value, UTC).withZoneSameInstant(KST).format(DATETIME_FORMATTER);
-            System.out.println(">> Before(UTC) :: " + value + " >> After(KST) :: " + formattedDateTime);
+            System.out.println("LocalDateTimeSerializerCustom >> Before(UTC) :: " + value + " >> After(KST) :: " + formattedDateTime);
             gen.writeString(formattedDateTime);
         }
     }
+
+    private static class ZonedDateTimeSerializerCustom extends JsonSerializer<ZonedDateTime> {
+        @Override
+        public void serialize(ZonedDateTime value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+            String formattedDateTime = value.withZoneSameInstant(KST).format(DATETIME_FORMATTER);
+            System.out.println("ZonedDateTimeSerializerCustom >> Before(UTC) :: " + value + " >> After(KST) :: " + formattedDateTime);
+            gen.writeString(formattedDateTime);
+        }
+    }
+
+    // todo 방법3 - 커스텀모듈 (각필드 or DTO 클래스에 적용)
 }

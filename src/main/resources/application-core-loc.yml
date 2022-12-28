@@ -1,0 +1,6 @@
+spring:
+  config:
+    activate:
+      on-profile: loc
+test:
+  core-name: core-loc

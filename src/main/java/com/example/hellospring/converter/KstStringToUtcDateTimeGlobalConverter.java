@@ -32,7 +32,6 @@ public class KstStringToUtcDateTimeGlobalConverter implements Converter<String, 
             return null;
         }
 
-        // patterns 를 돌면서 날짜타입으로 정상 전환되면 반환한다.
         for (DateTimeFormatter pattern : dateTimeFormatters) {
             try {
                 LocalDateTime kstDateTime = LocalDateTime.parse(source, pattern);

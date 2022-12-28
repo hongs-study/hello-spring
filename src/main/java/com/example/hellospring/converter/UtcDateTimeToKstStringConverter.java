@@ -15,7 +15,7 @@ public class UtcDateTimeToKstStringConverter extends StdConverter<LocalDateTime,
     @Override
     public String convert(LocalDateTime value) {
         ZonedDateTime zonedDateTime = DateTimeUtil.kstFromUtc(value);
-        String kstString = zonedDateTime.toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS"));
+        String kstString = zonedDateTime.toLocalDateTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
         log.debug(" UTC={}  ===>  KST={}", value, kstString);
         return kstString;
     }

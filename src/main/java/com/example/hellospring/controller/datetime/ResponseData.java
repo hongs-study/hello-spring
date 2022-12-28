@@ -8,8 +8,8 @@ import lombok.Setter;
 @Setter
 public class ResponseData {
 
-    // @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul") - 방법1
-    //@JsonSerialize(converter = UtcDateTimeToKstStringConverter.class) // 방법2
+    // @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul") // 부분-방법1
+    @JsonSerialize(converter = UtcDateTimeToKstStringConverter.class) // 부분-방법2
     public LocalDateTime responseDatetime;
 
 }

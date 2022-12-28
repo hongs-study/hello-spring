@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Resolver로 어디까지 캐치 되는지 확인해본다.
+ * @UtcLocalDateTime 부분적용을 테스트한다.
  */
 @Validated
 @RestController

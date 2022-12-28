@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 테스트1 - 기본
- * 문자형의 날짜 요청데이터를 LocalDateTime으로 받는 방법을 알아본다.
- * 다양한 요청데이터 받는 방법으로 알아본다.
+ * 글로벌 적용을 테스트한다
  */
 @RestController
 @RequestMapping("/datetime/v1")

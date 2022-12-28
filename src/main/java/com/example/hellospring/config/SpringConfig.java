@@ -1,4 +1,4 @@
-package com.example.hellospring;
+package com.example.hellospring.config;
 
 import com.example.hellospring.repository.SpringDataJpaMemberRepository;
 import com.example.hellospring.service.CustomService;

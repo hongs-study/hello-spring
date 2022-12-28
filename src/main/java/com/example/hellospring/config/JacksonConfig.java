@@ -1,4 +1,4 @@
-package com.example.hellospring;
+package com.example.hellospring.config;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;

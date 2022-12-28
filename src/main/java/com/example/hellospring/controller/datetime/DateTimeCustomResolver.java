@@ -6,12 +6,12 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
+@Deprecated
 public class DateTimeCustomResolver implements HandlerMethodArgumentResolver {
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
-        return parameter.getParameterAnnotation(UtcLocalDateTime.class) != null;
-//        return parameter.hasParameterAnnotation(DateTimeCustom.class);
+        return parameter.hasParameterAnnotation(UtcLocalDateTime.class);
     }
 
     @Override

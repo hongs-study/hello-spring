@@ -5,13 +5,12 @@ import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import java.time.format.DateTimeFormatter;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 
+//@JsonDeserialize(converter = StringToUtcDateTimeConverter.class) // 작동 안 됨.
+@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 @Inherited
-@Target({ElementType.TYPE_USE, ElementType.PARAMETER})
+@Target({ElementType.PARAMETER, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface UtcLocalDateTime {
-//    DateTimeFormat format() default @DateTimeFormat(iso = ISO.DATE_TIME);
 }

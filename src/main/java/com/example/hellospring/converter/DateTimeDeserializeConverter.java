@@ -1,4 +1,4 @@
-package com.example.hellospring.controller.datetime;
+package com.example.hellospring.converter;
 
 import com.fasterxml.jackson.databind.util.StdConverter;
 import java.time.LocalDateTime;
@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 import org.springframework.util.StringUtils;
 
+@Deprecated
 public class DateTimeDeserializeConverter extends StdConverter<String, LocalDateTime> {
     @Override
     public LocalDateTime convert(final String value) {

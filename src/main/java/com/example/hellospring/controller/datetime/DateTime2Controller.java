@@ -1,8 +1,6 @@
 package com.example.hellospring.controller.datetime;
 
 import java.time.LocalDateTime;
-import javax.validation.constraints.Min;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,25 +20,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class DateTime2Controller {
 
     @GetMapping("/{datetime}")
-    public String requestparam(@UtcLocalDateTime @PathVariable("datetime") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") LocalDateTime datetime) {
+    public String requestparam(@PathVariable("datetime") @UtcLocalDateTime LocalDateTime datetime) {
         System.out.println(datetime);
         return datetime.toString();
     }
 
     @GetMapping("/query")
-    public String queryparam(@UtcLocalDateTime @RequestParam("datetime") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") LocalDateTime datetime) {
-        System.out.println(datetime);
-        return datetime.toString();
-    }
-
-    @GetMapping("/query2")
-    public String queryparam2(@UtcLocalDateTime String datetime) {
-        System.out.println(datetime);
-        return datetime.toString();
-    }
-
-    @GetMapping("/query3")
-    public String queryparam3(@RequestParam("datetime") @Min(value = 5, message = "5 이상 입력하세요") Integer datetime) {
+    public String queryparam(@UtcLocalDateTime @RequestParam("datetime") LocalDateTime datetime) {
         System.out.println(datetime);
         return datetime.toString();
     }
@@ -53,9 +39,11 @@ public class DateTime2Controller {
     }
 
     @PostMapping("/body")
-    public String requestBody(@RequestBody DateTimeRequest data) {
+    public ResponseData requestBody(@RequestBody DateTimeRequest data) {
         LocalDateTime datetime = data.getDatetime();
-        System.out.println(datetime);
-        return datetime.toString();
+        System.out.println("UTC:::: " + datetime);
+        ResponseData responseData = new ResponseData();
+        responseData.setResponseDatetime(datetime);
+        return responseData;
     }
 }

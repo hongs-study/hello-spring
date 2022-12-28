@@ -9,7 +9,7 @@ import lombok.Setter;
 public class ResponseData {
 
     // @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "Asia/Seoul") - 방법1
-    @JsonSerialize(converter = UtcDateTimeToKstStringConverter.class) // 방법2
+    //@JsonSerialize(converter = UtcDateTimeToKstStringConverter.class) // 방법2
     public LocalDateTime responseDatetime;
 
 }

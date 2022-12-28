@@ -13,15 +13,4 @@ public class WebMvcConfig implements WebMvcConfigurer {
         //registry.addConverter(new KstStringToUtcDateTimeConverter()); // 부분적용 시
         registry.addConverter(new KstStringToUtcDateTimeGlobalConverter()); // 글로벌 적용 시
     }
-
-    /*    @Override
-    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
-        resolvers.add(new DateTimeCustomResolver());
-        System.out.println("d");
-    }
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new DateTimeIntercepter());
-    }*/
 }

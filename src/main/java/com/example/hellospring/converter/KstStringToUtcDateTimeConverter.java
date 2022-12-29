@@ -3,18 +3,13 @@ package com.example.hellospring.converter;
 import com.example.hellospring.controller.datetime.UtcLocalDateTime;
 import com.example.hellospring.utils.DateTimeUtil;
 import com.fasterxml.jackson.databind.util.StdConverter;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Set;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.core.convert.converter.ConditionalGenericConverter;
 
@@ -25,13 +20,8 @@ import org.springframework.core.convert.converter.ConditionalGenericConverter;
 @Slf4j
 public class KstStringToUtcDateTimeConverter extends StdConverter<String, LocalDateTime> implements ConditionalGenericConverter {
 
-    private static final String dateFormat = "yyyy-MM-dd";
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(dateFormat);
-
-    Set<DateTimeFormatter> dateTimeFormatters = new HashSet<>(Arrays.asList(
-        DateTimeFormatter.ISO_DATE_TIME,
-        DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-    ));
+    // 1가지 포맷만 지원한다
+    private static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ISO_DATE_TIME;
 
     @Override
     public boolean matches(TypeDescriptor sourceType, TypeDescriptor targetType) {
@@ -55,24 +45,9 @@ public class KstStringToUtcDateTimeConverter extends StdConverter<String, LocalD
 
     private LocalDateTime getDateTimeFromString(String source) {
 
-        if (StringUtils.isEmpty(source.trim())) {
-            return null;
-        }
-
-        for (DateTimeFormatter pattern : dateTimeFormatters) {
-            try {
-                LocalDateTime kstDateTime = LocalDateTime.parse(source, pattern);
-                ZonedDateTime utcZonedDateTime = DateTimeUtil.utcFromKst(kstDateTime);
-                LocalDateTime utcDateTime = utcZonedDateTime.toLocalDateTime();
-                log.info(" KST={}  ===>  UTC={}", kstDateTime, utcDateTime);
-                return utcDateTime;
-            } catch (NullPointerException | DateTimeParseException ignored) {
-            }
-        }
-
+        // todo 입력된 날짜의 타임존을 확인 후 변환해야한다
         try {
-            LocalDate parsedDate = LocalDate.parse(source, DATE_FORMATTER);
-            LocalDateTime kstDateTime = LocalDateTime.of(parsedDate, LocalTime.MIN);
+            LocalDateTime kstDateTime = LocalDateTime.parse(source, DATETIME_FORMATTER);
             ZonedDateTime utcZonedDateTime = DateTimeUtil.utcFromKst(kstDateTime);
             LocalDateTime utcDateTime = utcZonedDateTime.toLocalDateTime();
             log.info(" KST={}  ===>  UTC={}", kstDateTime, utcDateTime);
@@ -80,6 +55,8 @@ public class KstStringToUtcDateTimeConverter extends StdConverter<String, LocalD
         } catch (NullPointerException | DateTimeParseException ignored) {
         }
 
-        return null;
+        // 포맷에 맞지 않으면 Exception 발생
+        throw new RuntimeException("This date-time format can't be converted. Please insert date-time format to [2022-01-01T10:15:30+09:00]");
+        //return null; // null 로 반환할 수도 있다(비지니스에 따라 결정)
     }
 }

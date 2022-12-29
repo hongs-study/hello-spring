@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
  * UTC (LocalDateTime) -> KST (String)
  */
 @Slf4j
-public class UtcDateTimeToKstStringConverter extends StdConverter<LocalDateTime, String> {
+public class UtcDateTimeToKstSerializer extends StdConverter<LocalDateTime, String> {
     @Override
     public String convert(LocalDateTime value) {
         ZonedDateTime zonedDateTime = DateTimeUtil.kstFromUtc(value);

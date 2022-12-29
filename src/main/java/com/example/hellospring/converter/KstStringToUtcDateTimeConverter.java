@@ -1,9 +1,9 @@
 package com.example.hellospring.converter;
 
 import com.example.hellospring.controller.datetime.UtcLocalDateTime;
-import com.example.hellospring.utils.DateTimeUtil;
 import com.fasterxml.jackson.databind.util.StdConverter;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -21,7 +21,8 @@ import org.springframework.core.convert.converter.ConditionalGenericConverter;
 public class KstStringToUtcDateTimeConverter extends StdConverter<String, LocalDateTime> implements ConditionalGenericConverter {
 
     // 1가지 포맷만 지원한다
-    private static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ISO_DATE_TIME;
+    private static final DateTimeFormatter DATETIME_FORMATTER = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
+    private final static ZoneId SERVER_TIMEZONE = ZoneId.of("UTC");
 
     @Override
     public boolean matches(TypeDescriptor sourceType, TypeDescriptor targetType) {
@@ -45,13 +46,13 @@ public class KstStringToUtcDateTimeConverter extends StdConverter<String, LocalD
 
     private LocalDateTime getDateTimeFromString(String source) {
 
-        // todo 입력된 날짜의 타임존을 확인 후 변환해야한다
+        // 입력된 날짜의 타임존을 확인 후 변환한다
         try {
-            LocalDateTime kstDateTime = LocalDateTime.parse(source, DATETIME_FORMATTER);
-            ZonedDateTime utcZonedDateTime = DateTimeUtil.utcFromKst(kstDateTime);
-            LocalDateTime utcDateTime = utcZonedDateTime.toLocalDateTime();
-            log.info(" KST={}  ===>  UTC={}", kstDateTime, utcDateTime);
-            return utcDateTime;
+            ZonedDateTime requestZonedDateTime = ZonedDateTime.parse(source, DATETIME_FORMATTER);
+            LocalDateTime serverDateTime = requestZonedDateTime.withZoneSameInstant(SERVER_TIMEZONE).toLocalDateTime();
+            log.info(" \r\nDateTime IN >>>> requestDateTime=[TimeZone:{}, DateTime:{}]  ===>  serverDateTime=[TimeZone:{}, DateTime:{}]"
+                , requestZonedDateTime.getZone(), requestZonedDateTime, SERVER_TIMEZONE, serverDateTime);
+            return serverDateTime;
         } catch (NullPointerException | DateTimeParseException ignored) {
         }
 

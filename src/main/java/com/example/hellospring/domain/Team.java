@@ -2,6 +2,7 @@ package com.example.hellospring.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -27,6 +28,7 @@ public class Team {
     @Column
     private String name;
 
-    @OneToMany(mappedBy = "team", fetch = FetchType.LAZY)
+    //@OneToMany(mappedBy = "team", fetch = FetchType.LAZY) -- cascade 없을 때: 있을 때와 동일한 결과임
+    @OneToMany(mappedBy = "team", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Member> memberList = new ArrayList<>();
 }

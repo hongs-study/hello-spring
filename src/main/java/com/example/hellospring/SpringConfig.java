@@ -17,8 +17,7 @@ public class SpringConfig {
     private final SpringDataJpaMemberRepository repository;
 
     @Autowired
-    public SpringConfig(DataSource dataSource, EntityManager em,
-        SpringDataJpaMemberRepository repository) {
+    public SpringConfig(DataSource dataSource, EntityManager em, SpringDataJpaMemberRepository repository) {
         this.dataSource = dataSource;
         this.em = em;
         this.repository = repository;

@@ -8,6 +8,15 @@ spring:
     username: root
     password:
   jpa:
-    show-sql: true
+    show-sql: false
     hibernate:
       ddl-auto: none
+
+  logging:
+    level:
+      root: info
+
+  decorator:
+    datasource:
+      p6spy:
+        enable-logging: true

@@ -20,8 +20,7 @@ class MemoryMemberRepositoryTest {
     @DisplayName("회원 도메인과 리파지토리의 작동을 확인한다.")
     @Test
     void testMember() {
-        Member member = new Member();
-        member.setName("홍길동");
+        Member member = Member.builder().name("홍길동").build();
 
         repository.save(member);
 
@@ -35,12 +34,10 @@ class MemoryMemberRepositoryTest {
     @Test
     void findByName() {
         //given
-        Member member1 = new Member();
-        member1.setName("홍길동1");
+        Member member1 = Member.builder().name("홍길동").build();
         repository.save(member1);
 
-        Member member2 = new Member();
-        member2.setName("홍길동2");
+        Member member2 = Member.builder().name("홍길동").build();
         repository.save(member2);
 
         Member result = repository.findByName("홍길동2")
@@ -52,12 +49,10 @@ class MemoryMemberRepositoryTest {
     @Test
     void findAll() {
         //given
-        Member member1 = new Member();
-        member1.setName("홍길동1");
+        Member member1 = Member.builder().name("홍길동").build();
         repository.save(member1);
 
-        Member member2 = new Member();
-        member2.setName("홍길동2");
+        Member member2 = Member.builder().name("홍길동").build();
         repository.save(member2);
 
         List<Member> all = repository.findAll();

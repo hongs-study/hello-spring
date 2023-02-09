@@ -64,9 +64,7 @@ public class JdbcMemberRepository implements MemberRepository {
             pstmt.setLong(1, id);
             rs = pstmt.executeQuery();
             if (rs.next()) {
-                Member member = new Member();
-                member.setId(rs.getLong("id"));
-                member.setName(rs.getString("name"));
+                Member member = Member.builder().id(rs.getLong("id")).name(rs.getString("name")).build();
                 return Optional.of(member);
             } else {
                 return Optional.empty();
@@ -90,9 +88,7 @@ public class JdbcMemberRepository implements MemberRepository {
             pstmt.setString(1, name);
             rs = pstmt.executeQuery();
             if (rs.next()) {
-                Member member = new Member();
-                member.setId(rs.getLong("id"));
-                member.setName(rs.getString("name"));
+                Member member = Member.builder().id(rs.getLong("id")).name(rs.getString("name")).build();
                 return Optional.of(member);
             }
             return Optional.empty();
@@ -115,9 +111,7 @@ public class JdbcMemberRepository implements MemberRepository {
             rs = pstmt.executeQuery();
             List<Member> members = new ArrayList<>();
             while (rs.next()) {
-                Member member = new Member();
-                member.setId(rs.getLong("id"));
-                member.setName(rs.getString("name"));
+                Member member = Member.builder().id(rs.getLong("id")).name(rs.getString("name")).build();
                 members.add(member);
             }
             return members;

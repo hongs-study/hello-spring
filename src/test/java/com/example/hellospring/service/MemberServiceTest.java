@@ -31,8 +31,7 @@ class MemberServiceTest {
     @DisplayName("[회원가입] 성공 테스트.")
     @Test
     void 회원가입() {
-        Member member = new Member();
-        member.setName("홍길동");
+        Member member = Member.builder().name("홍길동").build();
 
         Long joinId = memberService.join(member);
         Member findMember = memberService.findOne(joinId).orElseThrow(() -> new RuntimeException("실패"));
@@ -43,12 +42,10 @@ class MemberServiceTest {
     @DisplayName("[회원가입] 실패 테스트. 중복된 사용자가 있다.")
     @Test
     void joinDupleFail() {
-        Member member1 = new Member();
-        member1.setName("홍길동");
+        Member member1 = Member.builder().name("홍길동").build();
         memberService.join(member1);
 
-        Member member2 = new Member();
-        member2.setName("홍길동");
+        Member member2 = Member.builder().name("홍길동").build();
         IllegalStateException result = assertThrows(IllegalStateException.class,
             () -> {
                 memberService.join(member2);

@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:tcp://localhost/~/Developer/datasource/h2/spring-hello
+    username: sa
+    password:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+  redis:
+    host: localhost
+    port: 6370 # 주의:로컬에 이미 사용중인 Redis가 있다면 embeddedRedis를 사용하려면 포트를 다르게 해야한다.

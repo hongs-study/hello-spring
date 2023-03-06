@@ -22,7 +22,7 @@ dependencies {
     runtimeOnly 'com.h2database:h2'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation('it.ozimov:embedded-redis:0.7.3') { exclude group: "org.slf4j", module: "slf4j-simple" }
+    testImplementation('it.ozimov:embedded-redis:0.7.3') { exclude group: "org.slf4j", module: "slf4j-simple" } // slf4j-simple을 제거하지않으면 logback과 충돌난다
 
     // Lombok
     compileOnly 'org.projectlombok:lombok'
